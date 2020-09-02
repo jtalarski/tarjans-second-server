@@ -23,7 +23,8 @@ app.get('/coolfrogs', function (req, res) {
 //POST/frogs
 //create a new activity and add to array
 app.post('/coolfrogs', function (req, res) {
-    let newFrog = null;
+    console.log('I got a request!', req.body);
+    let newFrog = req.body;
     //pushing to 
     coolFrogs.push(newFrog);
     res.send(newFrog);

@@ -21,9 +21,30 @@ function onReady() {
     }).catch(function (badFrog) {
         console.log("Something bad happened!", badFrog);
         alert("Server is down, try again later");
-    })
+    });
+
+    $(document).on('click', '#frogbtn', onFrogBtn);
 
 }//onReady end
+
+function onFrogBtn() {
+    let newFrog = {
+        name: $('#frogname').val(),
+        frog: $('#frogfrog').val()
+    };
+    console.log('new froggy', newFrog);
+
+    $.ajax({
+        url: '/coolfrogs',
+        method: 'POST',
+        data: newFrog
+    }).then(function (response) {
+        console.log("created a frog", response);
+    }).catch(function (errorInfo) {
+        console.log('error time', errorInfo);
+    });
+}
+
 
 /*
 [{ name: "greg", frog: "frog" },
