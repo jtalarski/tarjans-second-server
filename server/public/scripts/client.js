@@ -18,7 +18,11 @@ function onReady() {
                 <td>${frog.frog}</td>
                 </tr>`);
         }//end for loop
-    })//end function
+    }).catch(function (badFrog) {
+        console.log("Something bad happened!", badFrog);
+        alert("Server is down, try again later");
+    })
+
 }//onReady end
 
 /*
