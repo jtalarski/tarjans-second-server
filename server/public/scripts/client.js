@@ -4,26 +4,23 @@ console.log("frogs?");
 $(document).ready(onReady);
 
 function onReady() {
-    console.log("frog time");
-
-    $.ajax({ url: "/coolfrogs" })
-        .then(function (response) {
-            console.log('we got a response!', response);
-        });
     //AJAX!!!
+    $.ajax({
+        url: "/coolfrogs",
+        method: 'GET'
+    }).then(function (frogs) {
+        console.log('we got a response!', frogs);
 
-
-
-    /*
-    for (let frog in frogs) {
-        $('tbody').append(`
-            <tr>
+        for (let frog of frogs) {
+            $('tbody').append(`
+                <tr>
                 <td>${frog.name}</td>
                 <td>${frog.frog}</td>
-            </tr>
-        `);
-    } */
-};
+                </tr>`);
+        }//end for loop
+    })//end function
+}//onReady end
+
 /*
 [{ name: "greg", frog: "frog" },
 { name: "alvin", frog: "bullfrog" },
