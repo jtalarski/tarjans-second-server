@@ -1,61 +1,77 @@
-
-console.log("frogs?");
+console.log('in client.js');
 
 $(document).ready(onReady);
 
 function onReady() {
-    refreshFrogs();
-    $(document).on('click', '#frogbtn', onFrogBtn);
+    console.log("I'm ready");
 
-}//onReady end
+    /*
+    Activity data looks like
+      {
+        activity: "Typing practice",
+        isScreenTime: true,
+        type: "Mind Exercises"
+      }
+    */
+    //let activities = ???;
 
-function refreshFrogs() {
-    //AJAX!!!
+
+    refreshActivities();
+
+
+    // Handle new activity form
+    $(document).on('click', '#submitBtn', onSubmit);
+
+} // end onReady
+
+
+function refreshActivities() {
+    // AJAX!!!!!!!
     $.ajax({
-        url: "/coolfrogs",
+        url: '/activities',
         method: 'GET'
-    }).then(function (frogs) {
-        console.log('we got a response!', frogs);
+    }).then((activities) => {
+        console.log("We got a response!", activities);
 
-        //render the frogs
+        // Render the activities
         $('tbody').empty();
-        for (let frog of frogs) {
+        for (let activity of activities) {
             $('tbody').append(`
-                <tr>
-                <td>${frog.name}</td>
-                <td>${frog.frog}</td>
-                </tr>`);
-        }//end for loop
+        <tr>
+          <td>${activity.activity}</td>
+          <td>${activity.isScreenTime}</td>
+          <td>${activity.type}</td>
+        </tr>
+      `);
+        } // end of for loop
 
-    }).catch(function (badFrog) {
-        console.log("Something bad happened!", badFrog);
+    }).catch(function(errorInfo) {
+        console.log("Something bad happened!", errorInfo);
         alert("Server is down, try again later");
-    });//end of AJAX!!!
-
+    }); // end of AJAX .then()
 }
 
-function onFrogBtn() {
-    let newFrog = {
-        name: $('#frogname').val(),
-        frog: $('#frogfrog').val()
+function onSubmit() {
+    let newActivity = {
+        activity: $('#activityInput').val(),
+        type: $('#typeInput').val(),
+        isScreenTime: $('#isScreenTimeInput').is(':checked')
     };
-    console.log('new froggy', newFrog);
+    console.log('new activity object', newActivity);
 
+
+    // POST /activities
+    // with our newActivity object
     $.ajax({
-        url: '/coolfrogs',
+        url: '/activities',
         method: 'POST',
-        data: newFrog
-    }).then(function (response) {
-        console.log("created a frog", response);
-        refreshFrogs();
-    }).catch(function (errorInfo) {
-        console.log('error time', errorInfo);
+        data: newActivity
+    }).then(function(response) {
+        console.log("Created an activity!", response);
+
+        console.log('time to refresh!')
+        refreshActivities();
+    }).catch(function(errorInfo) {
+        console.log('ruh-roh', errorInfo);
     });
 }
-
-
-/*
-[{ name: "greg", frog: "frog" },
-{ name: "alvin", frog: "bullfrog" },
-{ name: "spike", frog: "toad" }]
-*/
