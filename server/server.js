@@ -12,8 +12,8 @@ app.use(express.static('server/public'));
 // Setup body parser to read request JSON body
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// new for Express router
-app.use('/', activitiesRouter);
+// new for Express router. '/' refers to mounting the router.. it is the base URL
+app.use('/activities', activitiesRouter);
 
 
 // Listen for requests

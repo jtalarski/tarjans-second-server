@@ -8,7 +8,7 @@ const router = express.Router();
 // Endpoint (aka "route")
 // GET /activities
 // Respond with a list of activities
-router.get('/activities', (req, res) => {
+router.get('/', (req, res) => {
     // Send back the array of activities
     res.send(activities);
 });
@@ -17,7 +17,7 @@ router.get('/activities', (req, res) => {
 // POST /activities
 // Create a new activity
 // and add it to our activities array
-router.post('/activities', (req, res) => {
+router.post('/', (req, res) => {
     console.log("I got a request!", req.body);
     let newActivity = req.body;
 
