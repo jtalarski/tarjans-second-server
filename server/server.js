@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const activitiesRouter = require('./activites')
+const activitiesRouter = require('./activities')
 console.log("Look at me, I'm a server!")
 
 // Create an express app
