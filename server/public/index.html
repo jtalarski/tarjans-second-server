@@ -4,41 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Node App</title>
     <link rel="stylesheet" href="./styles/style.css">
-    <script src="./vendors/jquery-3.5.1.min.js"></script>
+    <script src="./vendors/jquery.js"></script>
     <script src="./scripts/client.js"></script>
-    <title>froggy time</title>
 </head>
 
-
 <body>
-    <h1>froggy time</h1>
+    <h1>Activities for Ari</h1>
+
+    <!--
+  Here's what my data looks like
+  {
+    activity: "Typing practice",
+    isScreenTime: true,
+    type: "Mind Exercises"
+  },
+  -->
     <table>
         <thead>
-            <th>name</th>
-            <th>frog type</th>
+            <tr>
+                <th>Activity</th>
+                <th>Screen Time?</th>
+                <th>Type</th>
+            </tr>
         </thead>
         <tbody>
-            <!-- <tr>
-                <td>greg</td>
-                <td>frog</td>
-            </tr>
-            <tr>
-                <td>alvin</td>
-                <td>bullfrog</td>
-            </tr>
-            <tr>
-                <td>spike</td>
-                <td>toad</td>
-            </tr> -->
 
         </tbody>
-
     </table>
-    <h2>new frog pls</h2>
-    <input type="text" id="frogname" placeholder="frog name pls">
-    <input type="text" id="frogfrog" placeholder="frog frog pls">
-    <button id="frogbtn">frog time</button>
+
+    <h2>Create a new activity</h2>
+    <input id="activityInput" placeholder="Activity Name" />
+    <input id="typeInput" placeholder="Activity Type" />
+    <label>
+        Is screen Time?
+        <input type="checkbox" id="isScreenTimeInput" />
+    </label>
+    <button id="submitBtn">Create!</button>
 </body>
 
 </html>

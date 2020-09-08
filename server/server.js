@@ -1,7 +1,6 @@
 const express = require('express');
-const activities = require('./data');
 const bodyParser = require('body-parser');
-
+const activitiesRouter = require('./activites')
 console.log("Look at me, I'm a server!")
 
 // Create an express app
@@ -13,33 +12,9 @@ app.use(express.static('server/public'));
 // Setup body parser to read request JSON body
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Endpoint (aka "route")
-// GET /activities
-// Respond with a list of activities
-app.get('/activities', (req, res) => {
-    // Send back the array of activities
-    res.send(activities);
-});
+// new for Express router
+app.use('/', activitiesRouter);
 
-// Endpoint
-// POST /activities
-// Create a new activity
-// and add it to our activities array
-app.post('/activities', (req, res) => {
-    console.log("I got a request!", req.body);
-    let newActivity = req.body;
-
-    // Server-side validation
-    if (newActivity.type === undefined) {
-        res.sendStatus(400);
-        return;
-    }
-
-    // Add the new activity to our list of activities
-    activities.push(newActivity);
-
-    res.send(newActivity);
-});
 
 // Listen for requests
 // Using array function syntax
